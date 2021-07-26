@@ -17,6 +17,7 @@ uint8_t *get_hostname()
     uint8_t str[20];
     gethostname(str, sizeof str);
     sprintf(host, "Host:%s", str);
+    printf("%s\n",str);
     return host;
 }
 uint8_t *get_mem()
@@ -25,6 +26,7 @@ uint8_t *get_mem()
     sysinfo(&info);
     static uint8_t buf[11];
     sprintf(buf, "Mem: %d MB", (info.freeram / 1024 / 1024));
+    printf("%s\n",buf);
     return buf;
 }
 
@@ -41,6 +43,7 @@ uint8_t *get_core_temp()
     fgets(temp, sizeof temp, fp);
     fclose(fp);
     sprintf(str, "CPU0 Temp: %d'C", atoi(temp) / 1000);
+    printf("%s\n",str);
     return str;
 }
 
@@ -50,6 +53,7 @@ uint8_t *get_processes()
     sysinfo(&info);
     static uint8_t buf[11];
     sprintf(buf, "Processes:%d", info.procs);
+    printf("%s\n",buf);
     return buf;
 }
 
@@ -82,6 +86,7 @@ uint8_t *get_network_rx_speed(const uint8_t *ifname)
         sprintf(str, "RX: %.3f MB/s", ((float)end - start) / 1000.0 / 1000.0);
     else
         sprintf(str, "RX: %.3f KB/s", ((float)end - start) / 1000.0);
+    printf("%s\n",str);
     return str;
 }
 
@@ -114,6 +119,7 @@ uint8_t *get_network_tx_speed(const uint8_t *ifname)
         sprintf(str, "TX: %.3f MB/s", ((float)end - start) / 1000.0 / 1000.0);
     else
         sprintf(str, "TX: %.3f KB/s", ((float)end - start) / 1000.0);
+    printf("%s\n",str);
     return str;
 }
 

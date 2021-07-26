@@ -43,7 +43,7 @@ void ssd1315_init(struct gpiod_line *pin_reset)
     spi_write_1byte(COMMAND, 0xAF);*/
     spi_write_commands(init_seq, sizeof init_seq);
     ssd1315_clear_buf();
-    ssd1315_send_buf;
+    ssd1315_send_buf();
     spi_write_1byte(COMMAND, 0xAF);
 }
 
