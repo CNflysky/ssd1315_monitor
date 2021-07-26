@@ -139,8 +139,8 @@ int main()
         ssd1315_clear_buf();
         ssd1315_draw_string_unifont_16(0, 0, get_core_temp(), true);
         ssd1315_draw_string_unifont_16(0, 16, get_mem(), true);
-        ssd1315_draw_string_unifont_16(0, 32, get_network_rx_speed("eth0"), true);
-        ssd1315_draw_string_unifont_16(0, 48, get_network_tx_speed("eth0"), true);
+        ssd1315_draw_string_unifont_16(0, 32, get_network_rx_speed(interface), true);
+        ssd1315_draw_string_unifont_16(0, 48, get_network_tx_speed(interface), true);
         //ssd1315_draw_string_unifont_16(0, 48, get_processes(), true);
         ssd1315_send_buf();
         sleep(1);
