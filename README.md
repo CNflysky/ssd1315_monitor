@@ -1,7 +1,7 @@
 # SSD1315_monitor
 
 A little oled panel for displaying performance data on SSD1315-based OLED module, wirtten in C  
-Use hardware SPI to connect the OLED module.  
+Use **hardware SPI** to connect the OLED module.  
 Should be compatible with ssd1306 controllers.  
 Only tested on Raspberry PI 4B.
 # How to use
@@ -16,7 +16,7 @@ Only tested on Raspberry PI 4B.
 | DC | GPIO18 |
 | CS | GPIO8/GND |
 ## Setup software
-Enter raspi-config,enable SPI Interface and exit.  
+Enter `raspi-config`,enable `SPI Interface` and exit.  
 You may need to install the `gpiod` and `make` package  
 `sudo apt install libgpiod-dev gpiod make`  
 ## Clone this repository  
