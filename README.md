@@ -1,5 +1,6 @@
 # SSD1315_monitor
 
+![demo](https://github.com/CNflysky/ssd1315_monitor/blob/30b27b2acf07eabf27873023a94d65e6d676ec41/IMG_20210726_133237_1.jpg)
 A little oled panel for displaying performance data on SSD1315-based OLED module, wirtten in C  
 Use **hardware SPI** to connect the OLED module.  
 Should be compatible with ssd1306 controllers.  
