@@ -2,12 +2,12 @@
 #include "gpio.h"
 #include "spi.h"
 #include "font.h"
-void ssd1315_init(struct gpiod_line *pin_reset)
+void ssd1315_init()
 {
     gpiod_line_set_value(pin_reset, 0);
-    sleep(1);
+    delay(50);
     gpiod_line_set_value(pin_reset, 1);
-    uint8_t init_seq[28]= {0xAE, 0x00, 0x10, 0x40, 0x81, 0xCF, 0xA1, 0xC8, 0xA6, 0xA8, 0x3F, 0xD3, 0x00, 0xD5, 0x80, 0xD9, 0xF1, 0xDA, 0x12, 0xDB, 0x40, 0x20, 0x02, 0x8D, 0x14, 0xA4, 0xA6};
+    uint8_t init_seq[28] = {0xAE, 0x00, 0x10, 0x40, 0x81, 0xCF, 0xA1, 0xC8, 0xA6, 0xA8, 0x3F, 0xD3, 0x00, 0xD5, 0x80, 0xD9, 0xF1, 0xDA, 0x12, 0xDB, 0x40, 0x20, 0x02, 0x8D, 0x14, 0xA4, 0xA6};
     /*spi_write_1byte(COMMAND, 0xAE); //--turn off oled panel
     spi_write_1byte(COMMAND, 0x00); //---set low column address
     spi_write_1byte(COMMAND, 0x10); //---set high column address
@@ -69,7 +69,7 @@ void ssd1315_send_buf()
     }
 }
 
-void ssd1315_draw_point(uint8_t x, uint8_t y, bool mode)
+void ssd1315_draw_point_with_mode(uint8_t x, uint8_t y, bool mode)
 {
     if (mode)
         display_buffer[x][y / 8] |= 1 << (y % 8);
@@ -79,6 +79,11 @@ void ssd1315_draw_point(uint8_t x, uint8_t y, bool mode)
         display_buffer[x][y / 8] |= 1 << (y % 8);
         display_buffer[x][y / 8] = ~display_buffer[x][y / 8];
     }
+}
+
+void ssd1315_draw_point(uint8_t x, uint8_t y)
+{
+    ssd1315_draw_point_with_mode(x, y, true);
 }
 
 void ssd1315_fill_screen()
@@ -118,7 +123,7 @@ void ssd1315_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
         distance = delta_y;
     for (t = 0; t <= distance + 1; t++)
     {
-        ssd1315_draw_point(uRow, uCol, true);
+        ssd1315_draw_point_with_mode(uRow, uCol, true);
         xerr += delta_x;
         yerr += delta_y;
         if (xerr > distance)
@@ -173,14 +178,14 @@ void ssd1315_draw_circle(uint16_t xc, uint16_t yc, uint16_t radius,
 
 void ssd1315_precircle(uint16_t xc, uint16_t yc, uint16_t x, uint16_t y)
 {
-    ssd1315_draw_point(xc + x, yc + y, true);
-    ssd1315_draw_point(xc - x, yc + y, true);
-    ssd1315_draw_point(xc + x, yc - y, true);
-    ssd1315_draw_point(xc - x, yc - y, true);
-    ssd1315_draw_point(xc + y, yc + x, true);
-    ssd1315_draw_point(xc - y, yc + x, true);
-    ssd1315_draw_point(xc + y, yc - x, true);
-    ssd1315_draw_point(xc - y, yc - x, true);
+    ssd1315_draw_point_with_mode(xc + x, yc + y, true);
+    ssd1315_draw_point_with_mode(xc - x, yc + y, true);
+    ssd1315_draw_point_with_mode(xc + x, yc - y, true);
+    ssd1315_draw_point_with_mode(xc - x, yc - y, true);
+    ssd1315_draw_point_with_mode(xc + y, yc + x, true);
+    ssd1315_draw_point_with_mode(xc - y, yc + x, true);
+    ssd1315_draw_point_with_mode(xc + y, yc - x, true);
+    ssd1315_draw_point_with_mode(xc - y, yc - x, true);
 }
 
 void ssd1315_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, bool filled)
@@ -204,26 +209,40 @@ void ssd1315_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, 
         ssd1315_draw_line(x2, y1, x2, y2);
     }
 }
-void ssd1315_draw_char_unifont_16(uint8_t x, uint8_t y, uint8_t ch, uint8_t mode)
+
+void ssd1315_draw_string(uint8_t x, uint8_t y, uint8_t *font, uint8_t *str)
+{
+    uint8_t width = font_get_width(font);
+    while ((*str >= ' ') && (*str <= '~')) //判断是不是非法字符!
+    {
+        ssd1315_draw_char(x, y, font, *str);
+        if (width == 8)
+            x += 6;
+        else
+            x += width / 2;
+        str++;
+    }
+}
+
+void ssd1315_draw_char(uint8_t x, uint8_t y, uint8_t *font, uint8_t ch)
 {
     uint8_t x0 = x, y0 = y;
-    uint8_t size = 16;
-    uint8_t size1 = (size / 8 + ((size % 8) ? 1 : 0)) * (size / 2);
     uint8_t ch1 = ch - ' ';
-    for (uint8_t i = 0; i < size1; i++)
+    uint8_t width = font_get_width("unifont_16");
+    for (uint8_t i = 0; i < width; i++)
     {
-        uint8_t temp = font_unifont_16[ch1][i];
+        uint8_t temp = font_get_char(font, ch1, i);
         for (uint8_t m = 0; m < 8; m++)
         {
             if (temp & 0x01)
-                ssd1315_draw_point(x, y, mode);
+                ssd1315_draw_point_with_mode(x, y, true);
             else
-                ssd1315_draw_point(x, y, !mode);
+                ssd1315_draw_point_with_mode(x, y, false);
             temp >>= 1;
             y++;
         }
         x++;
-        if ((size1 != 8) && ((x - x0) == size1 / 2))
+        if ((width != 8) && ((x - x0) == width / 2))
         {
             x = x0;
             y0 = y0 + 8;
@@ -232,21 +251,11 @@ void ssd1315_draw_char_unifont_16(uint8_t x, uint8_t y, uint8_t ch, uint8_t mode
     }
 }
 
-void ssd1315_draw_string_unifont_16(uint8_t x, uint8_t y, uint8_t *str, uint8_t mode)
+void ssd1315_close()
 {
-    while ((*str >= ' ') && (*str <= '~')) //判断是不是非法字符!
-    {
-        ssd1315_draw_char_unifont_16(x, y, *str, mode);
-        x += 8;
-        str++;
-    }
-}
-
-
-void ssd1315_close(){
-   ssd1315_clear_screen();
-   ssd1315_send_buf();
-   spi_write_1byte(COMMAND,0xAE);
-   spi_fd_close();
-   printf("close completed.\n");
+    ssd1315_clear_screen();
+    ssd1315_send_buf();
+    spi_write_1byte(COMMAND, 0xAE);
+    spi_fd_close();
+    printf("close completed.\n");
 }
