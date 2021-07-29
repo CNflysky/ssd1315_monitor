@@ -61,11 +61,14 @@ void ssd1315_send_buf()
 {
     for (uint8_t i = 0; i < 8; i++)
     {
-        spi_write_1byte(COMMAND, 0xb0 + i); //设置行起始地址
-        spi_write_1byte(COMMAND, 0x00);     //设置低列起始地址
-        spi_write_1byte(COMMAND, 0x10);     //设置高列起始地址
+        spi_write_1byte(COMMAND, 0xb0 + i);
+        spi_write_1byte(COMMAND, 0x00);
+        spi_write_1byte(COMMAND, 0x10);
+        uint8_t *buf = (uint8_t *)calloc(1, sizeof(uint8_t) * 128);
         for (uint8_t j = 0; j < 128; j++)
-            spi_write_1byte(DATA, display_buffer[j][i]);
+            buf[j] = display_buffer[j][i];
+        spi_write_bytes(buf, 128);
+        free(buf);
     }
 }
 

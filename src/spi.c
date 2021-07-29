@@ -45,7 +45,7 @@ void spi_write_1byte(datatype_t type, uint8_t data)
 
     if (ioctl(spi_fd, SPI_IOC_MESSAGE(1), &spi) < 0)
     {
-        fprintf(stderr, "Error:send data 0x%x with type %s failed:%s!\n",*buf ,(type == 0) ? "COMMAND" : "DATA", strerror(errno));
+        fprintf(stderr, "Error:send data 0x%x with type %s failed:%s!\n", *buf, (type == 0) ? "COMMAND" : "DATA", strerror(errno));
         free(buf);
         exit(1);
     }
@@ -71,6 +71,27 @@ void spi_write_commands(uint8_t *data, uint16_t len)
         exit(1);
     }
 }
-void spi_fd_close(){
-	close(spi_fd);
+
+void spi_write_bytes(uint8_t *data, uint16_t len)
+{
+    gpiod_line_set_value(pin_dc, DATA);
+    struct spi_ioc_transfer spi =
+        {
+            .tx_buf = (uint64_t)data,
+            .rx_buf = 0,
+            .len = len,
+            .delay_usecs = 0,
+            .bits_per_word = 8,
+            .speed_hz = spi_speed};
+
+    if (ioctl(spi_fd, SPI_IOC_MESSAGE(1), &spi) < 0)
+    {
+        fprintf(stderr, "Error:send data set failed:%s!\n", strerror(errno));
+        exit(1);
+    }
+}
+
+void spi_fd_close()
+{
+    close(spi_fd);
 }
