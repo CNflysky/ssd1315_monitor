@@ -51,9 +51,10 @@ int main()
     printf("Initializing OLED...\n");
     ssd1315_init();
     printf("Starting loop...\n");
-            uint8_t i = 0;
+    uint8_t i = 0;
     while (1)
     {
+	i = 0;
         do
         {
             cpu_mem_temp_info_page();

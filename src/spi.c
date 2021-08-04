@@ -5,7 +5,7 @@ void init_spi(const char *spidev_path, uint8_t mode, uint64_t speed)
     uint8_t bitsperword = 8;
     spi_mode = mode;
     spi_speed = speed;
-    int fd = open(spidev_path, O_RDWR);
+    uint32_t fd = open(spidev_path, O_NONBLOCK);
     if (!fd)
     {
         fprintf(stderr, "Error:open spidev failed:%s!\n", strerror(errno));
