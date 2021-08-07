@@ -25,5 +25,53 @@ You may need to install the `gpiod` and `make` package
 ## Compile it and run  
 `cd ssd1315_monitor && make && ./ssd1315`
 
-# Custom
-TODO  
+# Customize
+## Hardware Setup
+open `src/main.c`
+```c
+const uint8_t dc = 18; //dc pin
+const uint8_t reset = 17; //reset pin
+const uint8_t *interface = "eth0"; //interface name
+const uint8_t *spidev = "/dev/spidev0.0"; //spidev file
+const uint8_t *gpiochip = "gpiochip0"; //chip which dc and reset are in
+const uint8_t display_duration = 5; //duration of a info page should be displayed and switch to next page
+```
+## Add your own page  
+open `src/info.c` and `src/info.h`,then add your own function:
+```c
+#ifndef _INFO_H_
+#define _INFO_H_
+#include <stdio.h>
+char *display_hello_world();
+#endif
+```
+
+```c
+#include "info.h"
+char *display_hello_world(){
+  return "Hello,world";
+}
+```
+then add it to `main.c`:
+```c
+int main(){
+...
+ssd1315_draw_string(1,1,"unifont_16",display_hello_world());
+...
+}
+```
+and that's it.  
+Also,I have provided some functions to use:
+```c
+uint8_t *get_ip(const uint8_t *interface);
+uint8_t *get_mem();
+uint64_t *get_load_status();
+uint8_t *get_load(uint16_t rate);
+uint8_t *get_boot_time();
+uint8_t *get_core_temp();
+uint8_t *get_processes();
+uint64_t get_network_status(const uint8_t *ifname, const uint8_t *txorrx);
+uint8_t *get_network_speed(const uint8_t *ifname, const uint8_t *txorrx, uint16_t rate);
+uint8_t *get_network_total(const uint8_t *interface);
+```
+they have been decleared at `info.h`.
