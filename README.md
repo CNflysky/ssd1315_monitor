@@ -22,7 +22,7 @@ You may need to install the `gpiod` and `make` package
 `sudo apt install libgpiod-dev gpiod make`  
 ## Clone this repository  
 `git clone https://github.com/CNflysky/ssd1315_monitor.git`  
-## Compile it and run  
+## Compile and run  
 `cd ssd1315_monitor && make && ./ssd1315`
 
 # Customize
@@ -52,7 +52,7 @@ char *display_hello_world(){
   return "Hello,world";
 }
 ```
-then add it to `main.c`:
+then call it at `main.c`:
 ```c
 int main(){
 ...
