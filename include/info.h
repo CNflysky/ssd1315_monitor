@@ -11,7 +11,7 @@
 #include <sys/ioctl.h>
 #include <sys/sysinfo.h>
 #include <unistd.h>
-
+#include "i18n.h"
 #include "delay.h"
 uint8_t *get_ip(const uint8_t *interface);
 uint8_t *get_mem();

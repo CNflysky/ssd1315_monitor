@@ -3,6 +3,7 @@
 
 #include <gpiod.h>
 #include <stdint.h>
+#include "i18n.h"
 
 #include "delay.h"
 uint8_t display_buffer[128][8];

@@ -220,5 +220,5 @@ void ssd1315_close() {
   ssd1315_send_buf();
   spi_write_1byte(COMMAND, 0xAE);
   spi_fd_close();
-  printf("close completed.\n");
+  printf(i18n("close completed.\n"));
 }

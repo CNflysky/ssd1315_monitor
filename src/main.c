@@ -1,19 +1,20 @@
 #include <signal.h>
-
 #include "delay.h"
 #include "gpio.h"
 #include "info.h"
 #include "spi.h"
 #include "ssd1315.h"
+#include "i18n.h"
 const uint8_t dc = 18;
 const uint8_t reset = 17;
 const uint8_t *interface = "eth0";
 const uint8_t *spidev = "/dev/spidev0.0";
 const uint8_t *gpiochip = "gpiochip0";
 const uint8_t display_duration = 5;
+const uint32_t spi_speed = 125000000;
 
 void handle(int sig) {
-  printf("SIG %d Received,calling ssd1315_close()...\n", sig);
+  printf(i18n("SIG %d Received,calling ssd1315_close()...\n"), sig);
   ssd1315_close();
   exit(0);
 }
@@ -43,15 +44,16 @@ void network_info_page()  // take 1s too
 }
 
 int main() {
+  i18n_settings();
   signal(SIGINT, handle);
   signal(SIGTERM, handle);
   pin_reset = request_gpio(gpiochip, "pin_reset", reset);
   pin_dc = request_gpio(gpiochip, "pin_dc", dc);
-  printf("Initializing SPI...\n");
-  init_spi(spidev, SPI_MODE_0, 125000000);
-  printf("Initializing OLED...\n");
+  printf(i18n("Initializing SPI...\n"));
+  init_spi(spidev, SPI_MODE_0, spi_speed);
+  printf(i18n("Initializing OLED...\n"));
   ssd1315_init();
-  printf("Starting loop...\n");
+  printf(i18n("Starting loop...\n"));
   uint8_t i = 0;
   while (1) {
     i = 0;

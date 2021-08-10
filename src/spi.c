@@ -6,20 +6,20 @@ void init_spi(const char *spidev_path, uint8_t mode, uint64_t speed) {
   spi_speed = speed;
   uint32_t fd = open(spidev_path, O_NONBLOCK);
   if (!fd) {
-    perror("Error:open spidev failed");
+    perror(i18n("Error:open spidev failed"));
     exit(1);
   }
   spi_fd = fd;
   if (ioctl(fd, SPI_IOC_WR_MODE, &spi_mode) < 0) {
-    perror("Error:set spi mode failed");
+    perror(i18n("Error:set spi mode failed"));
     exit(1);
   }
   if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bitsperword) < 0) {
-    perror("Error:set spi bit failed");
+    perror(i18n("Error:set spi bit failed"));
     exit(1);
   }
   if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &spi_speed) < 0) {
-    perror("Error:set spi speed failed");
+    perror(i18n("Error:set spi speed failed"));
     exit(1);
   }
 }
@@ -36,7 +36,7 @@ void spi_write_1byte(datatype_t type, uint8_t data) {
                                  .speed_hz = spi_speed};
 
   if (ioctl(spi_fd, SPI_IOC_MESSAGE(1), &spi) < 0) {
-    fprintf(stderr, "Error:send data 0x%x with type %s failed:%s!\n", *buf,
+    fprintf(stderr, i18n("Error:send data 0x%x with type %s failed:%s!\n"), *buf,
             (type == 0) ? "COMMAND" : "DATA", strerror(errno));
     free(buf);
     exit(1);
@@ -54,7 +54,7 @@ void spi_write_commands(uint8_t *data, uint16_t len) {
                                  .speed_hz = spi_speed};
 
   if (ioctl(spi_fd, SPI_IOC_MESSAGE(1), &spi) < 0) {
-    perror("Error:send command set failed");
+    perror(i18n("Error:send command set failed"));
     exit(1);
   }
 }
@@ -69,7 +69,7 @@ void spi_write_bytes(uint8_t *data, uint16_t len) {
                                  .speed_hz = spi_speed};
 
   if (ioctl(spi_fd, SPI_IOC_MESSAGE(1), &spi) < 0) {
-    perror("Error:send data set failed");
+    perror(i18n("Error:send data set failed"));
     exit(1);
   }
 }
