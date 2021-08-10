@@ -11,7 +11,7 @@ const uint8_t *interface = "eth0";
 const uint8_t *spidev = "/dev/spidev0.0";
 const uint8_t *gpiochip = "gpiochip0";
 const uint8_t display_duration = 5;
-const uint32_t spi_speed = 125000000;
+const uint32_t speed = 125000000;
 
 void handle(int sig) {
   printf(i18n("SIG %d Received,calling ssd1315_close()...\n"), sig);
@@ -50,7 +50,7 @@ int main() {
   pin_reset = request_gpio(gpiochip, "pin_reset", reset);
   pin_dc = request_gpio(gpiochip, "pin_dc", dc);
   printf(i18n("Initializing SPI...\n"));
-  init_spi(spidev, SPI_MODE_0, spi_speed);
+  init_spi(spidev, SPI_MODE_0, speed);
   printf(i18n("Initializing OLED...\n"));
   ssd1315_init();
   printf(i18n("Starting loop...\n"));
