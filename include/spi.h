@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
-
+#include <string.h>
 #include "gpio.h"
 int spi_fd;
 uint8_t spi_mode;

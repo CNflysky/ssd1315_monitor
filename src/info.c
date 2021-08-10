@@ -88,7 +88,7 @@ uint8_t *get_core_temp() {
   static uint8_t str[10];
   FILE *fp = fopen("/sys/class/thermal/thermal_zone0/temp", "r");
   if (!fp) {
-    fprintf(stderr, "Error:open thermal file failed:%s\n", strerror(errno));
+    perror("Error:open thermal file failed");
     exit(1);
   }
   fgets(temp, sizeof temp, fp);
@@ -114,7 +114,7 @@ uint64_t get_network_status(const uint8_t *ifname, const uint8_t *txorrx) {
   uint8_t buf[1024];
   long speed;
   if (!fp) {
-    fprintf(stderr, "Error:open network file failed:%s\n", strerror(errno));
+    perror("Error:open network file failed");
     exit(1);
   }
   fread(buf, 1, sizeof buf, fp);
