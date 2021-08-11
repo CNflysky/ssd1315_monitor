@@ -1,17 +1,53 @@
 #include <signal.h>
+
+#include "config.h"
 #include "delay.h"
 #include "gpio.h"
+#include "i18n.h"
 #include "info.h"
 #include "spi.h"
 #include "ssd1315.h"
-#include "i18n.h"
-const uint8_t dc = 18;
-const uint8_t reset = 17;
-const uint8_t *interface = "eth0";
-const uint8_t *spidev = "/dev/spidev0.0";
-const uint8_t *gpiochip = "gpiochip0";
-const uint8_t display_duration = 5;
-const uint32_t speed = 125000000;
+uint8_t dc;
+uint8_t reset;
+uint8_t interface[15];
+uint8_t spidev[10];
+uint8_t gpiochip[10];
+uint8_t display_duration;
+uint32_t speed;
+
+void get_conf(const uint8_t *path) {
+  dc = parse_config_int(path, "dc");
+  reset = parse_config_int(path, "reset");
+  display_duration = parse_config_int(path, "display_duration");
+  speed = parse_config_int(path, "speed");
+  strcpy(interface, parse_config_string(path, "interface"));
+  strcpy(spidev, parse_config_string(path, "spidev"));
+  strcpy(gpiochip, parse_config_string(path, "gpiochip"));
+  if (dc == 0) {
+    printf(i18n("Error:dc is empty!\n"));
+    exit(1);
+  }
+  if (reset == 0) {
+    printf(i18n("Error:reset is empty!\n"));
+    exit(1);
+  }
+  if (display_duration == 0) {
+    printf(i18n("Error:display_duration is empty!\n"));
+    exit(1);
+  }
+  if (!strcmp(gpiochip, "Empty")) {
+    printf(i18n("Error:gpiochip is empty!\n"));
+    exit(1);
+  }
+  if (!strcmp(spidev, "Empty")) {
+    printf(i18n("Error:spidev is empty!\n"));
+    exit(1);
+  }
+  if (!strcmp(interface, "Empty")) {
+    printf(i18n("Error:interface is empty!\n"));
+    exit(1);
+  }
+}
 
 void handle(int sig) {
   printf(i18n("SIG %d Received,calling ssd1315_close()...\n"), sig);
@@ -45,6 +81,7 @@ void network_info_page()  // take 1s too
 
 int main() {
   i18n_settings();
+  get_conf("config.conf");
   signal(SIGINT, handle);
   signal(SIGTERM, handle);
   pin_reset = request_gpio(gpiochip, "pin_reset", reset);

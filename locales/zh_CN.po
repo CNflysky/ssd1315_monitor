@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-10 14:48+0800\n"
+"POT-Creation-Date: 2021-08-11 12:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,43 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/config.c:7
+msgid "Open config file failed"
+msgstr "打开配置文件失败"
+
+#: ../src/config.c:60
+#, c-format
+msgid "Invalid option %s found at line %d\n"
+msgstr "无效参数%s,行%d\n"
+
+#: ../src/config.c:62
+msgid "Error:speed is empty!\n"
+msgstr "错误:speed为空!\n"
+
+#: ../src/config.c:63
+msgid "Error:dc is empty!\n"
+msgstr "错误:dc为空!\n"
+
+#: ../src/config.c:64
+msgid "Error:reset is empty!\n"
+msgstr "错误:reset为空!\n"
+
+#: ../src/config.c:65
+msgid "Error:spidev is empty!\n"
+msgstr "错误:spidev为空!\n"
+
+#: ../src/config.c:66
+msgid "Error:interface is empty!\n"
+msgstr "错误:interface为空!\n"
+
+#: ../src/config.c:67
+msgid "Error:display_duration is empty!\n"
+msgstr "错误:display_duration为空!\n"
+
+#: ../src/config.c:68
+msgid "Error:gpiochip is empty!\n"
+msgstr "错误:gpiochip为空!\n"
 
 #: ../src/gpio.c:7
 msgid "Error:open chip failed"
@@ -73,7 +110,7 @@ msgstr "错误:设置spi速度失败"
 #: ../src/spi.c:39
 #, c-format
 msgid "Error:send data 0x%x with type %s failed:%s!\n"
-msgstr "错误:发送%s类型数据0x%x失败\n"
+msgstr "错误:发送数据0x%x失败,类型%s\n"
 
 #: ../src/spi.c:57
 msgid "Error:send command set failed"
