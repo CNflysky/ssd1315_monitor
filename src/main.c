@@ -59,10 +59,10 @@ void cpu_mem_temp_info_page()  // takes about 1s
 {
   ssd1315_clear_buf();
   ssd1315_draw_rectangle(0, 0, 127, 63, false);
-  ssd1315_draw_string(1, 1, "unifont_16", get_load(999));
-  ssd1315_draw_string(1, 17, "unifont_16", get_mem());
-  ssd1315_draw_string(1, 32, "unifont_16", get_boot_time());
-  ssd1315_draw_string(1, 47, "unifont_16", get_core_temp());
+  ssd1315_draw_string(1, 1, unifont_16, get_load(999));
+  ssd1315_draw_string(1, 17, unifont_16, get_mem());
+  ssd1315_draw_string(1, 32, unifont_16, get_boot_time());
+  ssd1315_draw_string(1, 47, unifont_16, get_core_temp());
   ssd1315_send_buf();
 }
 
@@ -70,12 +70,12 @@ void network_info_page()  // take 1s too
 {
   ssd1315_clear_buf();
   ssd1315_draw_rectangle(0, 0, 127, 63, false);
-  ssd1315_draw_string(1, 1, "unifont_16", get_ip(interface));
-  ssd1315_draw_string(1, 17, "unifont_16",
+  ssd1315_draw_string(1, 1, unifont_16, get_ip(interface));
+  ssd1315_draw_string(1, 17, unifont_16,
                       get_network_speed(interface, "tx", 500));
-  ssd1315_draw_string(1, 32, "unifont_16",
+  ssd1315_draw_string(1, 32, unifont_16,
                       get_network_speed(interface, "rx", 500));
-  ssd1315_draw_string(1, 47, "unifont_16", get_network_total(interface));
+  ssd1315_draw_string(1, 47, unifont_16, get_network_total(interface));
   ssd1315_send_buf();
 }
 

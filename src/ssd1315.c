@@ -1,6 +1,5 @@
 #include "ssd1315.h"
 
-#include "font.h"
 #include "gpio.h"
 #include "spi.h"
 void ssd1315_init() {
@@ -179,7 +178,7 @@ void ssd1315_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
   }
 }
 
-void ssd1315_draw_string(uint8_t x, uint8_t y, uint8_t *font, uint8_t *str) {
+void ssd1315_draw_string(uint8_t x, uint8_t y, fontname_t font, uint8_t *str) {
   uint8_t width = font_get_width(font);
   while ((*str >= ' ') && (*str <= '~'))  //判断是不是非法字符!
   {
@@ -192,10 +191,10 @@ void ssd1315_draw_string(uint8_t x, uint8_t y, uint8_t *font, uint8_t *str) {
   }
 }
 
-void ssd1315_draw_char(uint8_t x, uint8_t y, uint8_t *font, uint8_t ch) {
+void ssd1315_draw_char(uint8_t x, uint8_t y, fontname_t font, uint8_t ch) {
   uint8_t x0 = x, y0 = y;
   uint8_t ch1 = ch - ' ';
-  uint8_t width = font_get_width("unifont_16");
+  uint8_t width = font_get_width(font);
   for (uint8_t i = 0; i < width; i++) {
     uint8_t temp = font_get_char(font, ch1, i);
     for (uint8_t m = 0; m < 8; m++) {
