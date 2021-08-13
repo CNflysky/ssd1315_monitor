@@ -4,7 +4,7 @@
 A little oled panel for displaying performance data on SSD1315-based controller, written in C  
 Use **hardware SPI** to connect the OLED module.  
 Should be compatible with ssd1306 controllers.  
-Only tested on Raspberry PI 4B.
+Tested on Raspberry PI 4B and OrangePi Zero 2.
 # How to use
 ## Wire your module to the board:  
 | SSD1315 PIN | RPI 4B |
