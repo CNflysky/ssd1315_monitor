@@ -12,7 +12,6 @@ SH = bash
 TARGET = ssd1315
 
 CC = gcc
-CP = cp
 
 DEBUG = -g -O0
 CFLAGS += $(DEBUG)
