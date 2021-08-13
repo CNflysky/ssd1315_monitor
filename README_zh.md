@@ -28,12 +28,12 @@ OLED模块与开发板以**硬件SPI**的方式连接
 ## 硬件设置
 打开 `src/main.c`
 ```c
-const uint8_t dc = 18; //dc 引脚
-const uint8_t reset = 17; //reset 引脚
-const uint8_t *interface = "eth0"; //网络接口名
-const uint8_t *spidev = "/dev/spidev0.0"; //spidev文件
-const uint8_t *gpiochip = "gpiochip0"; //dc和reset所属的gpio芯片
-const uint8_t display_duration = 5; //每个页面的显示时间
+dc=18 #dc 引脚
+reset=17 #reset 引脚
+interface=eth0 #网络接口名
+spidev=/dev/spidev0.0 #spidev文件
+gpiochip=gpiochip0 #dc和reset所属的gpio芯片
+display_duration=5 #每个页面的显示时间
 ```
 ## 添加页面  
 打开 `src/info.c` 和 `src/info.h`,然后添加自定义功能:
