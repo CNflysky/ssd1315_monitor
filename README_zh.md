@@ -27,7 +27,7 @@ OLED模块与开发板以**硬件SPI**的方式连接
 # 自定义  
 ## 硬件设置
 打开 `src/main.c`
-```c
+```text
 dc=18 #dc 引脚
 reset=17 #reset 引脚
 interface=eth0 #网络接口名
