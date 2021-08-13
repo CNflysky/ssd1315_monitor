@@ -15,6 +15,16 @@ OLED模块与开发板以**硬件SPI**的方式连接
 | RES | GPIO17 |
 | DC | GPIO18 |
 | CS | GPIO8/GND |
+
+| SSD1315 PIN | OPI Zero 2 |
+| - | - |
+| VCC | 3.3V |
+| GND | 0V/GND |
+| SCL | GPIO230 |
+| SDA | GPIO231 |
+| RES | GPIO69 |
+| DC | GPIO70 |
+| CS | GPIO233/GND |
 ## 软件设置  
 进入`raspi-config`，启用SPI总线.  
 你可能需要安装`gpiod`与`make`软件包  
