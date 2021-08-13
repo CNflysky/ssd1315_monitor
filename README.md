@@ -27,14 +27,15 @@ You may need to install the `gpiod` and `make` package
 
 # Customize
 ## Hardware Setup
-open `src/main.c`
-```c
-const uint8_t dc = 18; //dc pin
-const uint8_t reset = 17; //reset pin
-const uint8_t *interface = "eth0"; //interface name
-const uint8_t *spidev = "/dev/spidev0.0"; //spidev file
-const uint8_t *gpiochip = "gpiochip0"; //chip which dc and reset are in
-const uint8_t display_duration = 5; //duration of a info page should be displayed and switch to next page
+open `config.conf`
+```text
+dc=18; #dc pin
+reset=17; #reset pin
+interface=eth0; #interface name
+spidev=/dev/spidev0.0; #spidev file
+gpiochip=gpiochip0; #chip which dc and reset are in
+display_duration=5; #duration of a info page should be displayed and switch to next page
+
 ```
 ## Add your own page  
 open `src/info.c` and `src/info.h`,then add your own function:
