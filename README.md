@@ -16,6 +16,16 @@ Tested on Raspberry PI 4B and OrangePi Zero 2.
 | RES | GPIO17 |
 | DC | GPIO18 |
 | CS | GPIO8/GND |
+
+| SSD1315 PIN | OPI Zero 2 |
+| - | - |
+| VCC | 3.3V |
+| GND | 0V/GND |
+| SCL | GPIO230 |
+| SDA | GPIO231 |
+| RES | GPIO69 |
+| DC | GPIO70 |
+| CS | GPIO233/GND |
 ## Setup software
 Enter `raspi-config`,enable `SPI Interface` and exit.  
 You may need to install the `gpiod` and `make` package  
