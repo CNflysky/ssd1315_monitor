@@ -29,12 +29,12 @@ You may need to install the `gpiod` and `make` package
 ## Hardware Setup
 open `config.conf`
 ```text
-dc=18; #dc pin
-reset=17; #reset pin
-interface=eth0; #interface name
-spidev=/dev/spidev0.0; #spidev file
-gpiochip=gpiochip0; #chip which dc and reset are in
-display_duration=5; #duration of a info page should be displayed and switch to next page
+dc=18 #dc pin
+reset=17 #reset pin
+interface=eth0 #interface name
+spidev=/dev/spidev0.0 #spidev file
+gpiochip=gpiochip0 #chip which dc and reset are in
+display_duration=5 #duration of a info page should be displayed and switch to next page
 
 ```
 ## Add your own page  
