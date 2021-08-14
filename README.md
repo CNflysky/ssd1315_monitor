@@ -45,7 +45,8 @@ or use the `systemd` service:
 `sudo dpkg -r ssd1315`  
 ## command line usage  
 
-```Usage:./ssd1315 [OPTION]... OR  
+```
+Usage:./ssd1315 [OPTION]... OR  
       ./ssd1315 -c [CONFIG_PATH]  
 -d,--dc                    specify dc pin.  
 -r,--reset                 specify reset pin.  
