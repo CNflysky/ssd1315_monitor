@@ -1,0 +1,9 @@
+Package: ssd1315
+Version: 0.1
+Architecture: arm64
+Maintainer: CNflysky
+Depends:libgpiod2
+Installed-Size: 1024
+Section: utils
+Priority: optional
+Description: ssd1315 oled panel

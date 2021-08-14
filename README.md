@@ -32,12 +32,41 @@ You may need to install the `gpiod` and `make` package
 `sudo apt install libgpiod-dev gpiod make`  
 ## Clone this repository  
 `git clone https://github.com/CNflysky/ssd1315_monitor.git`  
-## Compile and run  
-`cd ssd1315_monitor && make && ./ssd1315`
+## Compile and install 
+`cd ssd1315_monitor && ./make_debian_package.sh rpi4b.conf && sudo dpkg -i ssd1315.deb`  
+## Start 
+I have provided two ways to run this program:  
+`ssd1315 -b -c /usr/local/etc/ssd1315/config.conf`  
+and when you want it to be stoped,just run:  
+`ssd1315 -k`  
+or use the `systemd` service:  
+`sudo systemctl start ssd1315.service` and `sudo systemctl stop ssd1315.service`.  
+## Uninstall
+`sudo dpkg -r ssd1315`  
+## command line usage  
+
+```Usage:./ssd1315 [OPTION]... OR  
+      ./ssd1315 -c [CONFIG_PATH]  
+-d,--dc                    specify dc pin.  
+-r,--reset                 specify reset pin.  
+-i,--interface             specify network interface. e.g. eth0  
+-s,--spidev                specify spi bus. e.g. /dev/spidev0.0  
+-g,--gpiochip              specify gpiochip. e.g. gpiochip0  
+-p,--display-duration      specify display_duration.  
+-f,--speed                 specify spi speed.  
+-c,--config                specify config file path.  
+-b,--background            runs at background.  
+-k,--kill                  kill a running background instance of this program.  
+-h,--help                  print this message.  
+-v,--version               print version. 
+
+e.g. :ssd1315 -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f 125000000  
+```
+You can also get this help by running the `ssd1315 --help` command.  
 
 # Customize
 ## Hardware Setup
-open `config.conf`
+open `/usr/local/etc/ssd1315/config.conf`
 ```text
 dc=18 #dc pin
 reset=17 #reset pin

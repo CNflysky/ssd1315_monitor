@@ -5,9 +5,6 @@ DIR_OUT = $(DIR_CUR)
 
 OBJ_C = $(wildcard ${DIR_SRC}/*.c)
 OBJ_O = $(patsubst %.c,${DIR_OUT}/%.o,$(notdir ${OBJ_C}))
-INSTALLANG = $(DIR_CUR)/locales/install_locale.sh
-RMLANG = $(DIR_CUR)/locales/remove_locale.sh
-SH = bash
 
 TARGET = ssd1315
 
@@ -17,9 +14,6 @@ DEBUG = -g -O0
 CFLAGS += $(DEBUG)
 
 LIB = -lgpiod
-
-install_lang: $(TARGET)
-	$(SH) $(INSTALLANG)
 
 ${TARGET}:${OBJ_O}
 	$(CC) $(CFLAGS) $(OBJ_O) -o $@ $(LIB)

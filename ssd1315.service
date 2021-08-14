@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/home/pi/ssd1315_monitor/ssd1315 -c /home/pi/ssd1315_monitor/config.conf
+ExecStart=/usr/local/bin/ssd1315 -c /usr/local/etc/ssd1315/config.conf
 
 [Install]
 WantedBy=multi-user.target
