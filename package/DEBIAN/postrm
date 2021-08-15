@@ -1,2 +1,2 @@
 #!/bin/bash
-rm -rf /usr/local/etc/ssd1315
+#rm -rf /usr/local/etc/ssd1315

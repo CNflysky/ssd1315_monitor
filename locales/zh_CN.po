@@ -21,38 +21,33 @@ msgstr ""
 msgid "Open config file failed"
 msgstr "打开配置文件失败"
 
-#: ../src/config.c:60
-#, c-format
-msgid "Invalid option %s found at line %d\n"
-msgstr "无效参数%s,行%d\n"
-
 #: ../src/config.c:62
-msgid "Error:speed is empty!\n"
-msgstr "错误:speed为空!\n"
+msgid "Error:speed not specified or invalid:%d!\n"
+msgstr "错误:speed值未指定或无效:%d!\n"
 
 #: ../src/config.c:63
-msgid "Error:dc is empty!\n"
-msgstr "错误:dc为空!\n"
+msgid "Error:dc not specified or invalid:%d!\n"
+msgstr "错误:dc值未指定或无效:%d!\n"
 
 #: ../src/config.c:64
-msgid "Error:reset is empty!\n"
-msgstr "错误:reset为空!\n"
+msgid "Error:reset not specified or invalid:%d!\n"
+msgstr "错误:reset值未指定或无效:%d!\n"
 
 #: ../src/config.c:65
-msgid "Error:spidev is empty!\n"
-msgstr "错误:spidev为空!\n"
+msgid "Error:spidev not specified or invalid:%s!\n"
+msgstr "错误:spidev值未指定或无效:%s!\n"
 
 #: ../src/config.c:66
-msgid "Error:interface is empty!\n"
-msgstr "错误:interface为空!\n"
+msgid "Error:interface not specified or invalid:%s!\n"
+msgstr "错误:interface值未指定或无效:%s!\n"
 
 #: ../src/config.c:67
-msgid "Error:display_duration is empty!\n"
-msgstr "错误:display_duration为空!\n"
+msgid "Error:display_duration not specified or invalid:%d!\n"
+msgstr "错误:display_duration值未指定或无效:%d\n"
 
 #: ../src/config.c:68
-msgid "Error:gpiochip is empty!\n"
-msgstr "错误:gpiochip为空!\n"
+msgid "Error:gpiochip not specified or invalid::%s!\n"
+msgstr "错误:gpiochip值未指定或无效:%s!\n"
 
 #: ../src/gpio.c:7
 msgid "Error:open chip failed"
@@ -150,7 +145,7 @@ msgid ""
 "-h,--help                  print this message.\n"
 "-v,--version               print version.\n"
 "\n"
-"e.g. :ssd1315 -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
+"e.g. :%s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
 "125000000 \n"
 msgstr ""
 "用法:%s [选项]... 或者\n"
@@ -169,5 +164,5 @@ msgstr ""
 "-h,--help                  显示这个帮助.\n"
 "-v,--version               显示版本信息.\n"
 "\n"
-"使用示例 :ssd1315 -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
+"使用示例 :%s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
 "125000000 \n"
