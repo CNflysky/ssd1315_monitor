@@ -1,12 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# ssd1315 Chinese Simplified Messages.
+# Copyright (C) 2021 CNflysky.
+# This file is distributed under the same license as the ssd1315 package.
+# CNflysky <cnflysky@qq.com>, 2021.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-11 12:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -145,7 +145,7 @@ msgid ""
 "-h,--help                  print this message.\n"
 "-v,--version               print version.\n"
 "\n"
-"e.g. :%s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
+"e.g. %s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
 "125000000 \n"
 msgstr ""
 "用法:%s [选项]... 或者\n"
@@ -164,7 +164,7 @@ msgstr ""
 "-h,--help                  显示这个帮助.\n"
 "-v,--version               显示版本信息.\n"
 "\n"
-"使用示例 :%s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
+"使用示例: %s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
 "125000000 \n"
 
 msgid "Error:exec mem command failed!"

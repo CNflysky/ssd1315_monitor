@@ -83,7 +83,7 @@ void print_help(const char *name) {
            "-h,--help                  print this message.\n"
            "-v,--version               print version.\n"
            "\n"
-           "e.g. :%s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 "
+           "e.g. %s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 "
            "-p 5 "
            "-f 125000000 \n"),
       name, name,name);
