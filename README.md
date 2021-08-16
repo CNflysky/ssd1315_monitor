@@ -28,8 +28,8 @@ Tested on Raspberry PI 4B and OrangePi Zero 2.
 | CS | GPIO233/GND |
 ## Setup software
 Enter `raspi-config`,enable `SPI Interface` and exit.  
-You may need to install the `gpiod` and `make` package  
-`sudo apt install libgpiod-dev gpiod make`  
+You may need to install the `gpiod`,`make` and `gettext` package  
+`sudo apt install libgpiod-dev gpiod make gettext`  
 ## Clone this repository  
 `git clone https://github.com/CNflysky/ssd1315_monitor.git`  
 ## Compile and install 

@@ -27,8 +27,8 @@ OLED模块与开发板以**硬件SPI**的方式连接
 | CS | GPIO233/GND |
 ## 软件设置  
 进入`raspi-config`，启用SPI总线.  
-你可能需要安装`gpiod`与`make`软件包  
-`sudo apt install libgpiod-dev gpiod make`  
+你可能需要安装`gpiod`,`make`和`gettext`软件包  
+`sudo apt install libgpiod-dev gpiod make gettext`  
 ## 克隆仓库  
 `git clone https://github.com/CNflysky/ssd1315_monitor.git`  
 ## 编译并安装
