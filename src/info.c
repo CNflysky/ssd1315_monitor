@@ -14,10 +14,16 @@ uint8_t *get_ip(const uint8_t *interface) {
 }
 
 uint8_t *get_mem() {
-  struct sysinfo info;
-  sysinfo(&info);
-  static uint8_t buf[11];
-  sprintf(buf, "Mem: %d MB", (info.freeram / 1024 / 1024));
+  FILE *fp = popen("free -m | grep Mem", "r");
+  if (!fp) {
+    perror(i18n("Error:exec mem command failed!"));
+  }
+  uint32_t total, used, free, shared, buff, avail;
+  fscanf(fp, "Mem:%d %d %d %d %d %d", &total, &used, &free, &shared, &buff,
+         &avail);
+  pclose(fp);
+  static uint8_t buf[20];
+  sprintf(buf, "Mem: %d MB", avail);
   printf("%s\n", buf);
   return buf;
 }

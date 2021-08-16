@@ -10,7 +10,7 @@ TARGET = ssd1315
 
 CC = gcc
 
-DEBUG = -g -O0
+DEBUG = -g -O0 -static
 CFLAGS += $(DEBUG)
 
 LIB = -lgpiod

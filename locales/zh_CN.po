@@ -166,3 +166,6 @@ msgstr ""
 "\n"
 "使用示例 :%s -d 18 -r 17 -i eth0 -s /dev/spidev0.0 -g gpiochip0 -p 5 -f "
 "125000000 \n"
+
+msgid "Error:exec mem command failed!"
+msgstr "错误:执行内存命令失败!"
