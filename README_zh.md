@@ -32,7 +32,8 @@ OLED模块与开发板以**硬件SPI**的方式连接
 ## 克隆仓库  
 `git clone https://github.com/CNflysky/ssd1315_monitor.git`  
 ## 编译并安装
-`cd ssd1315_monitor && ./make_debian_package.sh rpi4b.conf && sudo dpkg -i ssd1315.deb`  
+如果想要使用别的配置文件,请修改`make_debian_package.sh`的第一个参数.  
+例如:`cd ssd1315_monitor && ./make_debian_package.sh rpi4b.conf && sudo dpkg -i ssd1315.deb`  
 ## 启动
 两种方式启动:    
 `ssd1315 -b -c /usr/local/etc/ssd1315/config.conf`  
