@@ -33,7 +33,8 @@ You may need to install the `gpiod`,`make` and `gettext` package
 ## Clone this repository  
 `git clone https://github.com/CNflysky/ssd1315_monitor.git`  
 ## Compile and install 
-`cd ssd1315_monitor && ./make_debian_package.sh rpi4b.conf && sudo dpkg -i ssd1315.deb`  
+for diffierent config file,update the `make_debian_package.sh`'s first option.  
+e.g. `cd ssd1315_monitor && ./make_debian_package.sh rpi4b.conf && sudo dpkg -i ssd1315.deb`  
 ## Start 
 I have provided two ways to run this program:  
 `ssd1315 -b -c /usr/local/etc/ssd1315/config.conf`  
