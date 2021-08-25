@@ -1,6 +1,6 @@
 # SSD1315_monitor
 ![demo](https://github.com/CNflysky/ssd1315_monitor/blob/30b27b2acf07eabf27873023a94d65e6d676ec41/IMG_20210726_133237_1.jpg)  
-一块基于SSD1315驱动的OLED屏幕，用于显示系统信息  
+基于SSD1315芯片的OLED屏幕驱动程序，用于显示系统信息  
 OLED模块与开发板以**硬件SPI**的方式连接  
 应该与SSD1306的OLED模块兼容.  
 在树莓派4B与香橙派Zero 2上测试通过。  
@@ -32,12 +32,16 @@ OLED模块与开发板以**硬件SPI**的方式连接
 ## 克隆仓库  
 `git clone https://github.com/CNflysky/ssd1315_monitor.git`  
 ## 编译并安装
+`cd ssd1315_monitor && ./make_debian_package.sh rpi4b.conf && sudo dpkg -i ssd1315.deb`  
 如果想要使用别的配置文件,请修改`make_debian_package.sh`的第一个参数.  
-例如:`cd ssd1315_monitor && ./make_debian_package.sh rpi4b.conf && sudo dpkg -i ssd1315.deb`  
+例如:`cd ssd1315_monitor && ./make_debian_package.sh opizero2.conf && sudo dpkg -i ssd1315.deb`  
 ## 启动
-两种方式启动:    
+本程序提供三种启动方法:  
+前台运行:  
+`ssd1315 -c /usr/local/etc/ssd1315/config.conf`  
+后台运行:  
 `ssd1315 -b -c /usr/local/etc/ssd1315/config.conf`  
-如果你想让它停下来，就运行:  
+停止一个正在运行的后台实例:  
 `ssd1315 -k`  
 或者用 `systemd` 服务来管理:  
 `sudo systemctl start ssd1315.service` 和 `sudo systemctl stop ssd1315.service`.  
@@ -95,7 +99,8 @@ char *display_hello_world(){
 ```c
 int main(){
 ...
-ssd1315_draw_string(1,1,"unifont_16",display_hello_world());
+ssd1315_draw_string(1,1,"
+unifont_16,display_hello_world());
 ...
 }
 ```
