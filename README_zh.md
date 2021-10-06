@@ -99,8 +99,7 @@ char *display_hello_world(){
 ```c
 int main(){
 ...
-ssd1315_draw_string(1,1,"
-unifont_16,display_hello_world());
+ssd1315_draw_string(1,1,unifont_16,display_hello_world());
 ...
 }
 ```
